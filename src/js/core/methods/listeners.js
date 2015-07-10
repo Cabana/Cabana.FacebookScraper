@@ -8,6 +8,14 @@ var listeners = function() {
 				return;	
 			}
 
+			var urlParse = function(href) {
+		    var l = document.createElement("a");
+		    l.href = href;
+		    return l;
+			};
+
+			Cabana.vars.FacebookScraper.baseUrl = urlParse(url).protocol+urlParse(url).host;
+
 			Cabana.FacebookScraper().ajax({
 				'url': location.href+'?parse='+url,
 				'method': 'GET'

@@ -74,6 +74,14 @@ Cabana.FacebookScraper = function() {
 						return;	
 					}
 		
+					var urlParse = function(href) {
+				    var l = document.createElement("a");
+				    l.href = href;
+				    return l;
+					};
+		
+					Cabana.vars.FacebookScraper.baseUrl = urlParse(url).protocol+urlParse(url).host;
+		
 					Cabana.FacebookScraper().ajax({
 						'url': location.href+'?parse='+url,
 						'method': 'GET'
@@ -109,8 +117,7 @@ Cabana.FacebookScraper = function() {
 		
 			if (Cabana.vars.FacebookScraper.urls[progress] && progress < 2) {
 		
-				// var host = location.host;
-				var host = 'http://fm.dk';
+				var host = Cabana.vars.FacebookScraper.baseUrl ? Cabana.vars.FacebookScraper.baseUrl : location.href;
 		
 				var url = object.loc.indexOf('http://') == -1 && object.loc.indexOf('https://') == -1 ? host+object.loc : object.loc;
 		

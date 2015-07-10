@@ -24,8 +24,7 @@ var scrape = function(object, progress) {
 
 	if (Cabana.vars.FacebookScraper.urls[progress] && progress < 2) {
 
-		// var host = location.host;
-		var host = 'http://fm.dk';
+		var host = Cabana.vars.FacebookScraper.baseUrl ? Cabana.vars.FacebookScraper.baseUrl : location.href;
 
 		var url = object.loc.indexOf('http://') == -1 && object.loc.indexOf('https://') == -1 ? host+object.loc : object.loc;
 
