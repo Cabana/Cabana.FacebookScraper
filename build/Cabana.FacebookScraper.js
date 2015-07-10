@@ -115,7 +115,7 @@ Cabana.FacebookScraper = function() {
 		
 		
 		
-			if (Cabana.vars.FacebookScraper.urls[progress] && progress < 2) {
+			if (Cabana.vars.FacebookScraper.urls[progress]) {
 		
 				var host = Cabana.vars.FacebookScraper.baseUrl ? Cabana.vars.FacebookScraper.baseUrl : location.href;
 		
