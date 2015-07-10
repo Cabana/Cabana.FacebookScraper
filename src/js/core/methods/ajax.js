@@ -6,16 +6,33 @@ var ajax = function(config, callback) {
 		return;
 	}
 
+	var result;
+
 	request.open(config.method, encodeURI(config.url));
 	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	request.onreadystatechange = function() {
-		if (request.readyState != 4 || request.status != 200) return;
+		if ((request.readyState != 4 || request.status != 200) && (request.status !== 500)) {
+			return;
+		} else {
 		
-		var result = JSON.parse(request.responseText);
-		
-		if (result && callback) {
-			callback(result);
-		} else if (config.callback) {
+			var result = JSON.parse(request.responseText);
+			
+			if (result && callback) {
+				callback(result);
+			} else if (config.callback) {
+				console.log("calling with config", config);
+
+				if (config.scrapeArguments) {
+					config.callback(config.scrapeArguments[0], config.scrapeArguments[1]);
+				}
+			}
+		}
+	};
+
+	request.onerror = function() {
+		console.log(request.status, request.responseText);
+
+		if (config.callback) {
 			console.log("calling with config", config);
 
 			if (config.scrapeArguments) {

@@ -14,7 +14,7 @@ var listeners = function() {
 		    return l;
 			};
 
-			Cabana.vars.FacebookScraper.baseUrl = urlParse(url).protocol+urlParse(url).host;
+			Cabana.vars.FacebookScraper.baseUrl = urlParse(url).protocol+'//'+urlParse(url).host;
 
 			Cabana.FacebookScraper().ajax({
 				'url': location.href+'?parse='+url,
